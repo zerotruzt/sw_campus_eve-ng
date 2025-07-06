@@ -1,6 +1,6 @@
 Layer 2 Switching Lab: VLANs, EtherChannel, and DHCP
 --------------------------------------------------------------------------------------------------
-This lab simulates a small enterprise Layer 2 network using EVE-NG. It includes multiple VLANs, dynamic host configuration, inter-switch trunking with EtherChannel (LACP), and remote SSH access for switch management.
+This lab simulates a small three-tier enterprise network using EVE-NG Community Edition. It includes multiple VLANs, dynamic host configuration, inter-switch trunking with EtherChannel (LACP), and remote SSH access for switch management.
 --------------------------------------------------------------------------------------------------
 Device Images Used
 
@@ -29,13 +29,13 @@ Access Layer (ASW1, ASW2): Client PCs connect here via access ports and receive 
 
 All four main VLANs are used:
 
-VLAN 10 (Sales) — 10.1.10.0/24
+- VLAN 10 (Sales) — 10.1.10.0/24
 
-VLAN 20 (Admin) — 10.1.20.0/24
+- VLAN 20 (Admin) — 10.1.20.0/24
 
-VLAN 30 (Guest) — 10.1.30.0/24
+- VLAN 30 (Guest) — 10.1.30.0/24
 
-VLAN 99 (Management) — 10.1.99.0/28
+- VLAN 99 (Management) — 10.1.99.0/28
 
 All hosts get their IP addresses dynamically via a central DHCP server.
 --------------------------------------------------------------------------------------------------
@@ -48,15 +48,15 @@ Routing & Addressing
 
 The DHCP server (router) is connected to the network through ASW1 and is configured with IP address 10.1.99.5 on interface e0/0. This IP is also used in the ip helper-address configuration on the SVIs.
 
-Each SVI is assigned as follows:
+- Each SVI is assigned as follows:
 
-DSW1: .1 addresses for each VLAN
+- DSW1: .1 addresses for each VLAN
 
-DSW2: .2 addresses
+- DSW2: .2 addresses
 
-ASW1 and ASW2: .3 and .4 on VLAN 99 only (for SSH)
+- ASW1 and ASW2: .3 and .4 on VLAN 99 only (for SSH)
 
-Core: .6 on VLAN 99 (management only)
+- Core: .6 on VLAN 99 (management only)
 --------------------------------------------------------------------------------------------------
 SSH Access
 
@@ -68,10 +68,12 @@ All switch-to-switch links use LACP-based EtherChannels (Po1 through Po7) with t
 --------------------------------------------------------------------------------------------------
 DHCP Relay
 
-DHCP broadcasts are forwarded to the central server using the ip helper-address command on each SVI. The DHCP server assigns IPs to all VLANs using configured pools.
+DHCP broadcasts are forwarded to the DHCP server in VLAN 99 using the ip helper-address command on each SVI. The DHCP server assigns IPs to all VLANs using configured pools while respecting the excluded addresses list.
 --------------------------------------------------------------------------------------------------
 
 Notes:
 
-Port security was not explicitly configured in this lab.
+- Port Security was not configured in this lab.
+- HSRP/VRRP was not configured in this lab.
+
 
