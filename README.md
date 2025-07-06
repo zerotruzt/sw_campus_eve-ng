@@ -21,21 +21,21 @@ The topology is built using a three-layer architecture:
 
 ![Network Topology](topology_labeled.png)
 
-	Core Layer: Connects the two distribution switches and provides a centralized management SVI.
+Core Layer: Connects the two distribution switches and provides a centralized management SVI.
 
-	Distribution Layer (DSW1, DSW2): These switches host the VLAN interfaces (SVIs) and act as the 	default gateways for the client devices.
+Distribution Layer (DSW1, DSW2): These switches host the VLAN interfaces (SVIs) and act as the 	default gateways for the client devices.
 
-	Access Layer (ASW1, ASW2): Client PCs connect here via access ports and receive IPs via DHCP. The 	DHCP server (router) is also connected here.
+Access Layer (ASW1, ASW2): Client PCs connect here via access ports and receive IPs via DHCP. The DHCP server (router) is also connected here.
 
 All four main VLANs are used:
 
-	VLAN 10 (Sales) — 10.1.10.0/24
+VLAN 10 (Sales) — 10.1.10.0/24
 
-	VLAN 20 (Admin) — 10.1.20.0/24
+VLAN 20 (Admin) — 10.1.20.0/24
 
-	VLAN 30 (Guest) — 10.1.30.0/24
+VLAN 30 (Guest) — 10.1.30.0/24
 
-	VLAN 99 (Management) — 10.1.99.0/28
+VLAN 99 (Management) — 10.1.99.0/28
 
 All hosts get their IP addresses dynamically via a central DHCP server.
 --------------------------------------------------------------------------------------------------
@@ -50,13 +50,13 @@ The DHCP server (router) is connected to the network through ASW1 and is configu
 
 Each SVI is assigned as follows:
 
-	DSW1: .1 addresses for each VLAN
+DSW1: .1 addresses for each VLAN
 
-	DSW2: .2 addresses
+DSW2: .2 addresses
 
-	ASW1 and ASW2: .3 and .4 on VLAN 99 only (for SSH)
+ASW1 and ASW2: .3 and .4 on VLAN 99 only (for SSH)
 
-	Core: .6 on VLAN 99 (management only)
+Core: .6 on VLAN 99 (management only)
 --------------------------------------------------------------------------------------------------
 SSH Access
 
